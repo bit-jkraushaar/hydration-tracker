@@ -1,0 +1,3 @@
+tasks:
+  - name: Angular CLI
+    init: npm install -g @angular/cli
