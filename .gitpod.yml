@@ -2,5 +2,9 @@ tasks:
   - name: Angular CLI
     init: npm install -g @angular/cli
   
-  - name: Install Dependencies
+  - name: Prepare Development
     init: npm install
+    command: npm run start
+ports:
+  - port: 4200
+    onOpen: open-preview
