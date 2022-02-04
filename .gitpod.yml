@@ -1,3 +1,4 @@
+
 tasks:
   - name: Angular CLI
     init: npm install -g @angular/cli
@@ -8,3 +9,6 @@ tasks:
 ports:
   - port: 4200
     onOpen: open-preview
+vscode:
+  extensions:
+    - angular.ng-template
