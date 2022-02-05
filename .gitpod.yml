@@ -9,6 +9,7 @@ tasks:
 ports:
   - port: 4200
     onOpen: open-browser
+    visibility: public
 vscode:
   extensions:
     - angular.ng-template
