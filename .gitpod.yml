@@ -8,7 +8,7 @@ tasks:
     command: npm run start-gitpod
 ports:
   - port: 4200
-    onOpen: open-preview
+    onOpen: open-browser
 vscode:
   extensions:
     - angular.ng-template
