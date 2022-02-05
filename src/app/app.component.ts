@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'hydration-tracker';
+  amount = 0;
+  progress = 0;
+
+  increase(): void {
+    this.amount = this.amount + 200;
+    this.progress = (this.amount / 2000) * 100;
+  }
 }
