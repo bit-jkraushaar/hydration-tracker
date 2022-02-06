@@ -3,6 +3,11 @@
     height: 100%;
 }
 
+mat-progress-spinner {
+    border-radius: 100%;
+    background-color: rgb(177, 224, 255);
+}
+
 #amount-tracker {
     position: absolute;
     display: flex;
