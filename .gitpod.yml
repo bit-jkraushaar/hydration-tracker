@@ -5,10 +5,11 @@ tasks:
   
   - name: Prepare Development
     init: npm install
-    command: npm run start
+    command: npm run start-gitpod
 ports:
   - port: 4200
-    onOpen: open-preview
+    onOpen: open-browser
+    visibility: public
 vscode:
   extensions:
     - angular.ng-template
