@@ -4,9 +4,23 @@
 }
 
 #amount-tracker {
-    font-size: 50pt;
-    font-weight: bold;
-    line-height: normal;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #amount-unit {
+        font-size: 16pt;
+        font-weight: bold;
+        line-height: normal;
+    }
+
+    #amount-label {
+        font-size: 40pt;
+        font-weight: bold;
+        line-height: normal;
+    }
 }
 
 #action-list {

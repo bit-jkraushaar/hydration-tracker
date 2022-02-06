@@ -1,7 +1,10 @@
 <mat-grid-list cols="1" rowHeight="fit" id="content-container">
   <mat-grid-tile>
-    <mat-progress-spinner [value]="progress"></mat-progress-spinner>
-    <span id="amount-tracker">{{amount}}</span>
+    <mat-progress-spinner [value]="progress" diameter="200"></mat-progress-spinner>
+    <div id="amount-tracker">
+      <span id="amount-label">{{amount}}</span>
+      <span id="amount-unit">ml</span>
+    </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
     <mat-action-list disableRipple="true" id="action-list">
