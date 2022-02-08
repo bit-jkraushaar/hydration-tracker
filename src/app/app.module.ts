@@ -10,10 +10,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+
+import { HistoryComponent } from './pages/history/history.component';
+import { StartComponent } from './pages/start/start.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HistoryComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +31,7 @@ import { MatListModule } from '@angular/material/list';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatListModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
