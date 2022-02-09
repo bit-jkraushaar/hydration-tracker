@@ -18,6 +18,12 @@ export class TrackingService {
     this.entries.next(entries);
   }
 
+  deleteEntry(entry: HistoryEntry): void {
+    let entries = this.entries.value;
+    entries = entries.filter(e => e.timestamp !== entry.timestamp);
+    this.entries.next(entries);
+  }
+
   findTodaysTotalAmount$(): Observable<number> {
     return this.entries.asObservable().pipe(
       map(entries => {

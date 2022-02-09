@@ -12,7 +12,7 @@
                         <span>{{entry.amount | number}} ml</span>
                     </div>
                     <div class="action">
-                        <button mat-mini-fab color="warn">
+                        <button mat-mini-fab color="warn" (click)="delete(entry)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
