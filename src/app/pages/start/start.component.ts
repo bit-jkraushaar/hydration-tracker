@@ -1,17 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.scss']
 })
-export class StartComponent {
+export class StartComponent implements OnInit {
 
-  amount = 0;
-  progress = 0;
+  amount$: Observable<number> = of(0);
+  progress$: Observable<number> = of(0);
+
+  constructor(private trackingService: TrackingService) {    
+  }
+
+  ngOnInit(): void {
+    this.amount$ = this.trackingService.findTodaysTotalAmount$();
+    this.progress$ = this.trackingService.findTodaysTotalAmount$().pipe(
+      map(amount => (amount / 2000) * 100),
+    );
+  }
 
   increase(inc: number): void {
-    this.amount = this.amount + inc;
-    this.progress = (this.amount / 2000) * 100;
+    this.trackingService.addEntry({timestamp: new Date(), amount: inc});
   }
 }

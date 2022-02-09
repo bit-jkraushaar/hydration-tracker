@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let group of history">
+    <mat-expansion-panel *ngFor="let group of (history$ | async)">
         <mat-expansion-panel-header>
             <mat-panel-title>{{group.timestamp | date : 'fullDate'}}</mat-panel-title>
             <mat-panel-description>{{group.totalAmount | number}} ml</mat-panel-description>

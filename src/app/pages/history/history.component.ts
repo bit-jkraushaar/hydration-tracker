@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { HistoryEntryGroup } from 'src/app/models/history-entry-group';
+import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
   selector: 'app-history',
@@ -8,26 +10,12 @@ import { HistoryEntryGroup } from 'src/app/models/history-entry-group';
 })
 export class HistoryComponent implements OnInit {
 
-  history: HistoryEntryGroup[] = [
-    {
-      timestamp: new Date(),
-      totalAmount: 250,
-      entries: [
-        {
-          timestamp: new Date(),
-          amount: 50,
-        },
-        {
-          timestamp: new Date(),
-          amount: 200,
-        }
-      ]
-    }
-  ];
+  history$: Observable<HistoryEntryGroup[]> = of([]);
 
-  constructor() { }
+  constructor(private trackingService: TrackingService) { }
 
   ngOnInit(): void {
+    this.history$ = this.trackingService.findEntriesGroupedByDate$();
   }
 
 }
