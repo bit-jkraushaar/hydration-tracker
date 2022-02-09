@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
@@ -32,6 +33,7 @@ import { StartComponent } from './pages/start/start.component';
     MatGridListModule,
     MatListModule,
     MatTabsModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

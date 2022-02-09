@@ -1,1 +1,23 @@
-<p>history works!</p>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let group of history">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{group.timestamp | date : 'fullDate'}}</mat-panel-title>
+            <mat-panel-description>{{group.totalAmount | number}} ml</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+            <mat-list-item *ngFor="let entry of group.entries">
+                <div class="history-entry">
+                    <div class="content">
+                        <span>{{entry.timestamp | date : 'mediumTime'}}</span>
+                        <span>{{entry.amount | number}} ml</span>
+                    </div>
+                    <div class="action">
+                        <button mat-mini-fab color="warn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>
