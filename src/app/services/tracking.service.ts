@@ -1,40 +1,36 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HistoryEntry } from '../models/history-entry';
 import { HistoryEntryGroup } from '../models/history-entry-group';
+import { DatabaseService } from '../repositories/database.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackingService {
 
-  entries = new BehaviorSubject<HistoryEntry[]>([]);
-
-  constructor() { }
+  constructor(private databaseService: DatabaseService) { }
 
   addEntry(entry: HistoryEntry): void {
-    const entries = this.entries.value;
-    entries.push(entry);
-    this.entries.next(entries);
+    this.databaseService.save$(entry).subscribe();
   }
 
   deleteEntry(entry: HistoryEntry): void {
-    let entries = this.entries.value;
-    entries = entries.filter(e => e.timestamp !== entry.timestamp);
-    this.entries.next(entries);
+    if (entry.id) {
+      this.databaseService.delete$(entry.id).subscribe();
+    }
   }
 
   findTodaysTotalAmount$(): Observable<number> {
-    return this.entries.asObservable().pipe(
+    return this.databaseService.findByDate$(new Date()).pipe(
       map(entries => {
-        // TODO filter for todays entries
         return entries.reduce((acc, value) => (acc + value.amount), 0)
       }),
     );
   }
 
   findEntriesGroupedByDate$(): Observable<HistoryEntryGroup[]> {
-    return this.entries.asObservable().pipe(
+    return this.databaseService.findAll$().pipe(
       map(entries => {
         // TODO group by date
         const totalAmount = entries.reduce((acc, value) => (acc + value.amount), 0);
