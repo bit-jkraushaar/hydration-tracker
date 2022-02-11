@@ -7,7 +7,7 @@ export class AppDatabase extends Dexie {
     constructor() {
         super('hydrationTrackerDB');
         this.version(1).stores({
-            historyEntries: '++id',
+            historyEntries: '++id,timestamp',
         });
     }
 }

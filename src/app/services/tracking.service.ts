@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import * as dayjs from 'dayjs';
+import { map, mergeMap, Observable, range, toArray } from 'rxjs';
 import { HistoryEntry } from '../models/history-entry';
 import { HistoryEntryGroup } from '../models/history-entry-group';
 import { DatabaseService } from '../repositories/database.service';
@@ -30,19 +31,23 @@ export class TrackingService {
   }
 
   findEntriesGroupedByDate$(): Observable<HistoryEntryGroup[]> {
-    return this.databaseService.findAll$().pipe(
-      map(entries => {
-        // TODO group by date
-        const totalAmount = entries.reduce((acc, value) => (acc + value.amount), 0);
-        const groups: HistoryEntryGroup[] = [
-          {
-            timestamp: new Date(),
+    const today = dayjs().startOf('day');
+
+    return range(0, 7).pipe(
+      map(days => today.subtract(days, 'days').toDate()),
+      // TODO does not work, because liveQuery
+      mergeMap(date => this.databaseService.findByDate$(date).pipe(
+        map(entries => {
+          const totalAmount = entries.reduce((acc, value) => (acc + value.amount), 0);
+          const group: HistoryEntryGroup = {
+            timestamp: date,
             totalAmount,
             entries
-          }
-        ];
-        return groups;
-      }),
+          };
+          return group;
+        }),
+      )),
+      toArray(),
     );
   }
 }

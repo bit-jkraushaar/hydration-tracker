@@ -3,6 +3,7 @@ import { liveQuery } from 'dexie';
 import { from, Observable } from 'rxjs';
 import { HistoryEntry } from '../models/history-entry';
 import { db } from './database';
+import * as dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,13 @@ export class DatabaseService {
   }
 
   findByDate$(date: Date): Observable<HistoryEntry[]> {
+    const d = dayjs(date).startOf('day');
+    const lowerDate = d.toDate();
+    const upperDate = d.add(1, 'day').toDate();
     return from(
       liveQuery(() =>
-        db.historyEntries.toCollection()
-          .filter(historyEntry => {
-            const { timestamp } = historyEntry;
-            return timestamp.getFullYear() === date.getFullYear() &&
-              timestamp.getMonth() === date.getMonth() &&
-              timestamp.getDate() === date.getDate()
-          })
+        db.historyEntries.where('timestamp')
+          .between(lowerDate, upperDate)
           .toArray()
       )
     );
