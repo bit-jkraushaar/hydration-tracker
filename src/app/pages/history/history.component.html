@@ -1,23 +1,25 @@
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let group of (history$ | async)">
-        <mat-expansion-panel-header>
-            <mat-panel-title>{{group.timestamp | date : 'fullDate'}}</mat-panel-title>
-            <mat-panel-description>{{group.totalAmount | number}} ml</mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-list>
-            <mat-list-item *ngFor="let entry of group.entries">
-                <div class="history-entry">
-                    <div class="content">
-                        <span>{{entry.timestamp | date : 'mediumTime'}}</span>
-                        <span>{{entry.amount | number}} ml</span>
+    <ng-container *ngFor="let date of historyDates">
+        <mat-expansion-panel *ngIf="groups.get(date) | async as group">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{group.timestamp | date : 'fullDate'}}</mat-panel-title>
+                <mat-panel-description>{{group.totalAmount | number}} ml</mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-list>
+                <mat-list-item *ngFor="let entry of group.entries">
+                    <div class="history-entry">
+                        <div class="content">
+                            <span>{{entry.timestamp | date : 'mediumTime'}}</span>
+                            <span>{{entry.amount | number}} ml</span>
+                        </div>
+                        <div class="action">
+                            <button mat-mini-fab color="warn" (click)="delete(entry)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                    <div class="action">
-                        <button mat-mini-fab color="warn" (click)="delete(entry)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </div>
-                </div>
-            </mat-list-item>
-        </mat-list>
-    </mat-expansion-panel>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+    </ng-container>
 </mat-accordion>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import * as dayjs from 'dayjs';
+import { map, Observable } from 'rxjs';
 import { HistoryEntry } from 'src/app/models/history-entry';
 import { HistoryEntryGroup } from 'src/app/models/history-entry-group';
 import { TrackingService } from 'src/app/services/tracking.service';
@@ -11,12 +12,33 @@ import { TrackingService } from 'src/app/services/tracking.service';
 })
 export class HistoryComponent implements OnInit {
 
-  history$: Observable<HistoryEntryGroup[]> = of([]);
+  historyDates: Date[] = [];
+  groups: Map<Date, Observable<HistoryEntryGroup>> = new Map();
 
   constructor(private trackingService: TrackingService) { }
 
   ngOnInit(): void {
-    this.history$ = this.trackingService.findEntriesGroupedByDate$();
+    const today = dayjs().startOf('day');
+
+    for (let i = 0; i < 7; i++) {
+      const date = today.subtract(i, 'days').toDate();
+      this.historyDates.push(date);
+      this.groups.set(date, this.historyGroupByDate$(date));
+    }
+  }
+
+  private historyGroupByDate$(date: Date): Observable<HistoryEntryGroup> {
+    return this.trackingService.findByDate$(date).pipe(
+      map(entries => {
+        const totalAmount = entries.reduce((acc, value) => (acc + value.amount), 0);
+        const group: HistoryEntryGroup = {
+          timestamp: date,
+          totalAmount,
+          entries
+        };
+        return group;
+      })
+    );
   }
 
   delete(entry: HistoryEntry): void {
