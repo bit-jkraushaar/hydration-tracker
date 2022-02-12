@@ -15,12 +15,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HistoryComponent,
-    StartComponent
+    StartComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
