@@ -1,0 +1,43 @@
+#content-container {
+    width: 100%;
+    height: 100%;
+}
+
+mat-progress-spinner {
+    border-radius: 100%;
+    background-color: rgb(177, 224, 255);
+}
+
+#amount-tracker {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #amount-unit {
+        font-size: 16pt;
+        font-weight: bold;
+        line-height: normal;
+    }
+
+    #amount-label {
+        font-size: 40pt;
+        font-weight: bold;
+        line-height: normal;
+    }
+}
+
+#action-list {
+    min-width: 50%;
+
+    mat-list-item {
+        height: 60px;
+        padding: 10px 0;
+    }
+
+    button {
+        width: 100%;
+        height: inherit;
+    }
+}

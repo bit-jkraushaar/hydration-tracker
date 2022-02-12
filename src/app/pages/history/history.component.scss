@@ -1,0 +1,18 @@
+.history-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+
+        span:first-child {
+            font-weight: bold;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+<mat-grid-list cols="1" rowHeight="fit" id="content-container">
+    <mat-grid-tile>
+      <mat-progress-spinner [value]="progress$ | async" diameter="200"></mat-progress-spinner>
+      <div id="amount-tracker">
+        <span id="amount-label">{{amount$ | async | number}}</span>
+        <span id="amount-unit">ml</span>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="2">
+      <mat-action-list disableRipple="true" id="action-list">
+        <mat-list-item>
+          <button mat-flat-button color="primary" (click)="increase(50)">50 ml</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-flat-button color="primary" (click)="increase(100)">100 ml</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-flat-button color="primary" (click)="increase(200)">200 ml</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-flat-button color="primary" (click)="increase(300)">300 ml</button>
+        </mat-list-item>
+      </mat-action-list>
+    </mat-grid-tile>
+  </mat-grid-list>
