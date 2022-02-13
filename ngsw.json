@@ -1,0 +1,101 @@
+{
+  "configVersion": 1,
+  "timestamp": 1644757733641,
+  "index": "/hydration-tracker/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/hydration-tracker/favicon.ico",
+        "/hydration-tracker/index.html",
+        "/hydration-tracker/main.ff822af009423141.js",
+        "/hydration-tracker/manifest.webmanifest",
+        "/hydration-tracker/polyfills.f1bf7fb3ebf82299.js",
+        "/hydration-tracker/runtime.3635155120a0735f.js",
+        "/hydration-tracker/styles.87eea5566294147b.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/hydration-tracker/MaterialIcons-Regular.e625c6e04ac4d3b2.ttf",
+        "/hydration-tracker/Roboto-Light.a05a86de6a0c2cfc.ttf",
+        "/hydration-tracker/Roboto-Medium.8ca80686fa21208b.ttf",
+        "/hydration-tracker/Roboto-Regular.298c1099d7ff5993.ttf",
+        "/hydration-tracker/assets/fonts/MaterialIcons/LICENSE.txt",
+        "/hydration-tracker/assets/fonts/MaterialIcons/MaterialIcons-Regular.ttf",
+        "/hydration-tracker/assets/fonts/Roboto/LICENSE.txt",
+        "/hydration-tracker/assets/fonts/Roboto/Roboto-Light.ttf",
+        "/hydration-tracker/assets/fonts/Roboto/Roboto-Medium.ttf",
+        "/hydration-tracker/assets/fonts/Roboto/Roboto-Regular.ttf",
+        "/hydration-tracker/assets/icons/icon-128x128.png",
+        "/hydration-tracker/assets/icons/icon-144x144.png",
+        "/hydration-tracker/assets/icons/icon-152x152.png",
+        "/hydration-tracker/assets/icons/icon-192x192.png",
+        "/hydration-tracker/assets/icons/icon-384x384.png",
+        "/hydration-tracker/assets/icons/icon-512x512.png",
+        "/hydration-tracker/assets/icons/icon-72x72.png",
+        "/hydration-tracker/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/hydration-tracker/MaterialIcons-Regular.e625c6e04ac4d3b2.ttf": "fdd6d9a4dcf82dfa414bd681d9e2623007c4c664",
+    "/hydration-tracker/Roboto-Light.a05a86de6a0c2cfc.ttf": "51dbae4543aaa10096e344e48fcffe468bd314a9",
+    "/hydration-tracker/Roboto-Medium.8ca80686fa21208b.ttf": "fddc8b1c688ef3baed0d5a46abf5f01f0edaf02b",
+    "/hydration-tracker/Roboto-Regular.298c1099d7ff5993.ttf": "84d102488738b0ebbc7a5087973effbd54c95bd5",
+    "/hydration-tracker/assets/fonts/MaterialIcons/LICENSE.txt": "1128f8f91104ba9ef98d37eea6523a888dcfa5de",
+    "/hydration-tracker/assets/fonts/MaterialIcons/MaterialIcons-Regular.ttf": "fdd6d9a4dcf82dfa414bd681d9e2623007c4c664",
+    "/hydration-tracker/assets/fonts/Roboto/LICENSE.txt": "47b573e3824cd5e02a1a3ae99e2735b49e0256e4",
+    "/hydration-tracker/assets/fonts/Roboto/Roboto-Light.ttf": "51dbae4543aaa10096e344e48fcffe468bd314a9",
+    "/hydration-tracker/assets/fonts/Roboto/Roboto-Medium.ttf": "fddc8b1c688ef3baed0d5a46abf5f01f0edaf02b",
+    "/hydration-tracker/assets/fonts/Roboto/Roboto-Regular.ttf": "84d102488738b0ebbc7a5087973effbd54c95bd5",
+    "/hydration-tracker/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/hydration-tracker/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/hydration-tracker/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/hydration-tracker/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/hydration-tracker/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/hydration-tracker/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/hydration-tracker/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/hydration-tracker/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/hydration-tracker/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/hydration-tracker/index.html": "0bd6e52718d80bfdcd54f1ec21056488e4db2a24",
+    "/hydration-tracker/main.ff822af009423141.js": "d9331279ef7dc0f2dd0160fe6b395287ceaa2551",
+    "/hydration-tracker/manifest.webmanifest": "e8d5aec943f1d7c5a955fd39978e234627c5f07c",
+    "/hydration-tracker/polyfills.f1bf7fb3ebf82299.js": "d510ba066027b74fbe4bee02e825bb6097213bb3",
+    "/hydration-tracker/runtime.3635155120a0735f.js": "454986c599db772ce5937181db313a0dcc65e22a",
+    "/hydration-tracker/styles.87eea5566294147b.css": "79793d861501f70a82098d6586a783612b3898f3"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
