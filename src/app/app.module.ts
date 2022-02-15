@@ -38,12 +38,13 @@ import { environment } from '../environments/environment';
     MatListModule,
     MatTabsModule,
     MatExpansionModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    //ServiceWorkerModule.register('sw-sync.js'),
   ],
   providers: [],
   bootstrap: [AppComponent]
