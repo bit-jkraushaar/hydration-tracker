@@ -1,0 +1,11 @@
+<div>
+    <h1>Notification Triggers (experimental)</h1>
+    <p>
+        Notification Triggers support is:
+        <span *ngIf="notificationTriggersSupported else triggersDisabled">enabled</span>
+        <ng-template #triggersDisabled>
+            <span>disabled</span>
+        </ng-template>
+    </p>
+    <mat-slide-toggle>Enable Notifications</mat-slide-toggle>
+</div>
