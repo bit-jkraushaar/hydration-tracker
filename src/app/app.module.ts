@@ -49,6 +49,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    //ServiceWorkerModule.register('sw-sync.js'),
   ],
   providers: [],
   bootstrap: [AppComponent],
