@@ -1,16 +1,15 @@
 (function () {
-  "use strict";
+  'use strict';
 
   self.addEventListener('notificationclick', function(event) {
-    console.log('On notification click: ', event.notification.tag);
     event.notification.close();
 
-    console.log(self);
-
-    self.registration.showNotification('Notification Test', {
-      tag: 'notification-test',
-      body: 'This notification was scheduled 30 seconds ago',
-      showTrigger: new TimestampTrigger(Date.now() + 30 * 1000),
+    // TODO Duplicated in SettingsComponent
+    const nextNotification = Date.now() + (60 * 60 * 1000);
+    registration.showNotification('Hydration Tracker', {
+      tag: 'reminder',
+      body: 'Drink more water',
+      showTrigger: new TimestampTrigger(nextNotification),
     });
   
     // This looks to see if the current is already open and
@@ -18,16 +17,12 @@
     event.waitUntil(self.clients.matchAll({
       type: 'window'
     }).then(function(clientList) {
-      console.log(clientList);
-
       for (var i = 0; i < clientList.length; i++) {
         var client = clientList[i];
-        if (client.url == '/' && 'focus' in client) {
+        if ('focus' in client) {
           return client.focus();
         }    
       }
-
-      console.log(self.clients);
 
       if (self.clients.openWindow) {
         return self.clients.openWindow('/');

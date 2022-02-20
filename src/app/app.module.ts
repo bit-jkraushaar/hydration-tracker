@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
@@ -42,6 +43,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     MatTabsModule,
     MatExpansionModule,
     MatSlideToggleModule,
+    MatCardModule,
 
     ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,
@@ -49,7 +51,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    //ServiceWorkerModule.register('sw-sync.js'),
   ],
   providers: [],
   bootstrap: [AppComponent],
