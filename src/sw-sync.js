@@ -1,44 +1,38 @@
 (function () {
   "use strict";
 
-  self.addEventListener("activate", function (event) {
-    event.waitUntil(serverSync());
-  });
+  self.addEventListener('notificationclick', function(event) {
+    console.log('On notification click: ', event.notification.tag);
+    event.notification.close();
 
-  async function serverSync() {
-    const status = await navigator.permissions.query({
-      name: "periodic-background-sync",
+    console.log(self);
+
+    self.registration.showNotification('Notification Test', {
+      tag: 'notification-test',
+      body: 'This notification was scheduled 30 seconds ago',
+      showTrigger: new TimestampTrigger(Date.now() + 30 * 1000),
     });
-    console.log(status);
-    if (status.state === "granted") {
-      console.log("Periodic background sync can be used.");
+  
+    // This looks to see if the current is already open and
+    // focuses if it is
+    event.waitUntil(self.clients.matchAll({
+      type: 'window'
+    }).then(function(clientList) {
+      console.log(clientList);
 
-      //const registration = await navigator.serviceWorker.ready;
-      const registration = self.registration;
-      console.log(registration);
-      if ("periodicSync" in registration) {
-        try {
-          await registration.periodicSync.register("content-sync", {
-            // An interval of one minute.
-            minInterval: 60 * 1000,
-          });
-          console.log("periodic sync registered");
-        } catch (error) {
-          // Periodic background sync cannot be used.
-          console.log(error);
-        }
-      } else {
-          console.log("no periodicSync in registration");
+      for (var i = 0; i < clientList.length; i++) {
+        var client = clientList[i];
+        if (client.url == '/' && 'focus' in client) {
+          return client.focus();
+        }    
       }
-    } else {
-      console.log("Periodic background sync cannot be used.");
-    }
-  }
 
-  self.addEventListener("periodicsync", function (event) {
-    if (event.tag == "content-sync") {
-      console.log("periodic sync called");
-    }
+      console.log(self.clients);
+
+      if (self.clients.openWindow) {
+        return self.clients.openWindow('/');
+      }
+    }));
   });
 
 })();
