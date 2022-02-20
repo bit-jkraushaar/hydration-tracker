@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-subtitle>Experimental</mat-card-subtitle>
+  <mat-card-title>Notifications</mat-card-title>
+  <mat-card-content>
+    <p>In order to use notifications</p>
+    <ul>
+      <li>you have to open this app in Chrome/Chromium,</li>
+      <li>
+        you have to enable the experimental feature flag
+        #enable-experimental-web-platform-features,
+      </li>
+      <li>
+        your browser has to support Notification Triggers, see
+        <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=891339">
+          Chromium Issue 891339
+        </a>
+      </li>
+    </ul>
+    <p>
+      Notification Triggers support is:
+      <span
+        class="strong"
+        *ngIf="notificationTriggersSupported; else triggersDisabled"
+      >
+        enabled
+      </span>
+      <ng-template #triggersDisabled>
+        <span class="strong">disabled</span>
+      </ng-template>
+    </p>
+    <mat-slide-toggle
+      (change)="changeNotifications($event)"
+      [disabled]="!notificationTriggersSupported"
+      [checked]="notificationsEnabled"
+    >
+      Enable notifications
+    </mat-slide-toggle>
+  </mat-card-content>
+</mat-card>

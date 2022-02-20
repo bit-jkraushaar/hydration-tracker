@@ -12,19 +12,23 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HistoryComponent,
     StartComponent,
-    AboutComponent
+    AboutComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,14 +42,17 @@ import { environment } from '../environments/environment';
     MatListModule,
     MatTabsModule,
     MatExpansionModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    MatSlideToggleModule,
+    MatCardModule,
+
+    ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
