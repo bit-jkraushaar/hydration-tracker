@@ -8,7 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start-pwa": "ng build --prod && http-server -p 4200 -c-1 dist/hydration-tracker"
+    "start-pwa": "ng build --prod && http-server -p 4200 -c-1 dist/hydration-tracker",
+    "deploy-to-gh": "ng deploy --base-href=/hydration-tracker/"
   },
   "private": true,
   "dependencies": {
