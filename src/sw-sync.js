@@ -25,7 +25,7 @@
       }
 
       if (self.clients.openWindow) {
-        return self.clients.openWindow('/');
+        return self.clients.openWindow('/hydration-tracker/');
       }
     }));
   });
