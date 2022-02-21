@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 declare var TimestampTrigger: any;
@@ -9,6 +9,8 @@ declare var TimestampTrigger: any;
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent {
+  notifications: any[] = [];
+
   constructor() {}
 
   async changeNotifications(change: MatSlideToggleChange) {
@@ -26,11 +28,11 @@ export class SettingsComponent {
       if (state !== 'granted') {
         return alert('You need to grant notifications permission.');
       }
-  
+
       const registration = await navigator.serviceWorker.getRegistration();
       if (registration) {
         // TODO Duplicated in sw-sync.js
-        const nextNotification = Date.now() + (60 * 60 * 1000);
+        const nextNotification = Date.now() + 60 * 60 * 1000;
         registration.showNotification('Hydration Tracker', {
           tag: 'reminder',
           body: 'Drink more water',
@@ -44,6 +46,22 @@ export class SettingsComponent {
     } else {
       localStorage.setItem('notificationsEnabled', 'false');
     }
+  }
+
+  reloadScheduledNotifications(): void {
+    navigator.serviceWorker.getRegistration().then((registration) => {
+      if (registration) {
+        registration
+          .getNotifications({
+            tag: 'reminder',
+            includeTriggered: true,
+          } as any)
+          .then((notifications) => {
+            console.log(notifications);
+            this.notifications = notifications;
+          });
+      }
+    });
   }
 
   get notificationTriggersSupported(): boolean {

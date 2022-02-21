@@ -35,5 +35,14 @@
     >
       Enable notifications
     </mat-slide-toggle>
+    <div *ngIf="notificationTriggersSupported">
+      <p>Scheduled Notifications:</p>
+      <ul>
+        <li *ngFor="let notification of notifications">
+          {{notification.showTrigger.timestamp | json}}
+        </li>
+      </ul>
+      <button mat-button (click)="reloadScheduledNotifications()">Reload</button>
+    </div>
   </mat-card-content>
 </mat-card>
