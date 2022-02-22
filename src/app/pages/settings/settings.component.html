@@ -35,5 +35,10 @@
     >
       Enable notifications
     </mat-slide-toggle>
+    <div *ngIf="nextNotification$ | async as nextNotification">
+      <p class="margin-reversed">
+        Next notification: {{notificationDate(nextNotification) | date : 'short'}}
+      </p>
+    </div>
   </mat-card-content>
 </mat-card>
