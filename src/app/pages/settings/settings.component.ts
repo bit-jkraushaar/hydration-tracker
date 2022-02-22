@@ -10,11 +10,10 @@ declare var TimestampTrigger: any;
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-
   nextNotification$ = new BehaviorSubject<Notification | undefined>(undefined);
 
   constructor() {}
-  
+
   ngOnInit(): void {
     this.reloadScheduledNotifications();
   }
@@ -53,6 +52,7 @@ export class SettingsComponent implements OnInit {
       }
     } else {
       localStorage.setItem('notificationsEnabled', 'false');
+      this.deletePendingNotifications();
     }
   }
 
@@ -77,6 +77,26 @@ export class SettingsComponent implements OnInit {
               )
               .find((_, index) => index === 0);
             this.nextNotification$.next(notification);
+          });
+      }
+    });
+  }
+
+  deletePendingNotifications(): void {
+    if (!this.notificationTriggersSupported) {
+      return;
+    }
+
+    navigator.serviceWorker.getRegistration().then((registration) => {
+      if (registration) {
+        registration
+          .getNotifications({
+            tag: 'reminder',
+            includeTriggered: true,
+          } as any)
+          .then((notifications) => {
+            notifications.forEach((notification) => notification.close());
+            this.reloadScheduledNotifications();
           });
       }
     });
