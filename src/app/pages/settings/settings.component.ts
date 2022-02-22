@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { BehaviorSubject } from 'rxjs';
 
 declare var TimestampTrigger: any;
 
@@ -8,10 +9,15 @@ declare var TimestampTrigger: any;
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent {
-  notifications: any[] = [];
+export class SettingsComponent implements OnInit {
+
+  nextNotification$ = new BehaviorSubject<Notification | undefined>(undefined);
 
   constructor() {}
+  
+  ngOnInit(): void {
+    this.reloadScheduledNotifications();
+  }
 
   async changeNotifications(change: MatSlideToggleChange) {
     if (change.checked) {
@@ -38,6 +44,8 @@ export class SettingsComponent {
           body: 'Drink more water',
           showTrigger: new TimestampTrigger(nextNotification) as any,
         } as any);
+
+        this.reloadScheduledNotifications();
       } else {
         return alert(
           'Service Worker is not registered, cannot show notifications.'
@@ -49,6 +57,10 @@ export class SettingsComponent {
   }
 
   reloadScheduledNotifications(): void {
+    if (!this.notificationTriggersSupported) {
+      return;
+    }
+
     navigator.serviceWorker.getRegistration().then((registration) => {
       if (registration) {
         registration
@@ -57,11 +69,26 @@ export class SettingsComponent {
             includeTriggered: true,
           } as any)
           .then((notifications) => {
-            console.log(notifications);
-            this.notifications = notifications;
+            const notification = notifications
+              .sort(
+                (a, b) =>
+                  (a as any).showTrigger?.timestamp -
+                  (b as any).showTrigger?.timestamp
+              )
+              .find((_, index) => index === 0);
+            this.nextNotification$.next(notification);
           });
       }
     });
+  }
+
+  notificationDate(notification: Notification): Date | undefined {
+    if (notification) {
+      const timestamp = (notification as any).showTrigger?.timestamp;
+      return new Date(timestamp);
+    } else {
+      return undefined;
+    }
   }
 
   get notificationTriggersSupported(): boolean {
