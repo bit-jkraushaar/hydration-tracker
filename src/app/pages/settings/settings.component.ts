@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
         // TODO Duplicated in sw-sync.js
         const nextNotification = Date.now() + 60 * 60 * 1000;
         registration.showNotification('Hydration Tracker', {
-          tag: 'reminder',
+          tag: 'reminder-' + nextNotification,
           body: 'Drink more water',
           showTrigger: new TimestampTrigger(nextNotification) as any,
         } as any);
@@ -65,7 +65,6 @@ export class SettingsComponent implements OnInit {
       if (registration) {
         registration
           .getNotifications({
-            tag: 'reminder',
             includeTriggered: true,
           } as any)
           .then((notifications) => {
@@ -91,7 +90,6 @@ export class SettingsComponent implements OnInit {
       if (registration) {
         registration
           .getNotifications({
-            tag: 'reminder',
             includeTriggered: true,
           } as any)
           .then((notifications) => {
