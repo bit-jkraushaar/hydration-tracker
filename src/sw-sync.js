@@ -2,13 +2,13 @@
   "use strict";
 
   self.addEventListener("notificationclick", function (event) {
-    console.log("click");
     event.notification.close();
 
+    // TODO Has to be placed in waitUntil()
     // TODO Duplicated in SettingsComponent
     const nextNotification = Date.now() + 60 * 60 * 1000;
     registration.showNotification("Hydration Tracker", {
-      tag: "reminder",
+      tag: "reminder-" + nextNotification,
       body: "Drink more water",
       showTrigger: new TimestampTrigger(nextNotification),
     });
@@ -36,24 +36,19 @@
   });
 
   self.addEventListener("notificationclose", function (event) {
-    console.log("close");
-    //event.notification.close();
-
     const schedule = async () => {
       // TODO Duplicated in SettingsComponent
+      // Timestamp is also used in tag, otherwise Chrome does not allow to create
+      // notifications with same tag in notificationclose.
       const nextNotification = Date.now() + 60 * 60 * 1000;
-      console.log("schedule");
       return self.registration
         .showNotification("Hydration Tracker", {
-          tag: "reminder",
+          tag: "reminder-" + nextNotification,
           body: "Drink more water",
           showTrigger: new TimestampTrigger(nextNotification),
-        })
-        .then((result) => console.log("registered"));
+        });
     };
 
-    console.log("waitUntil");
     event.waitUntil(schedule());
-    console.log("end");
   });
 })();
