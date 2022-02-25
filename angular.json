@@ -31,7 +31,8 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/sw-master.js",
-              "src/sw-sync.js"
+              "src/sw-sync.js",
+              "src/notification-utils.js"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
