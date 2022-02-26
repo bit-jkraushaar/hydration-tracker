@@ -14,7 +14,11 @@ async function scheduleNotification() {
   // notifications with same tag in notificationclose.
   return self.registration.showNotification("Hydration Tracker", {
     tag: "reminder-" + nextNotification,
-    body: "Drink more water",
+    body: "Don't forget to drink water",
+    silent: false,
+    vibrate: [200, 100, 200],
+    icon: './assets/icons/icon-192x192.png',
+    badge: './assets/icons/icon-96x96.png',
     showTrigger: new TimestampTrigger(nextNotification),
   });
 }
