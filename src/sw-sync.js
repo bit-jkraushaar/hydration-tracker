@@ -1,4 +1,4 @@
-importScripts('./notification-utils.js');
+importScripts("./notification-utils.js");
 
 (() => {
   "use strict";
@@ -15,7 +15,7 @@ importScripts('./notification-utils.js');
             return client.focus();
           }
         }
-  
+
         if (self.clients.openWindow) {
           return self.clients.openWindow("/hydration-tracker/");
         }
@@ -30,5 +30,11 @@ importScripts('./notification-utils.js');
 
   self.addEventListener("notificationclose", (event) => {
     event.waitUntil(scheduleNotification());
+  });
+
+  self.addEventListener("message", (event) => {
+    if (event.data && event.data.type === "ENABLE_NOTIFICATIONS") {
+      event.waitUntil(scheduleNotification());
+    }
   });
 })();

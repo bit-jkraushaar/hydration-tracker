@@ -14,8 +14,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadScheduledNotifications();
-
-    importScripts('../../../notification-utils');
   }
 
   async changeNotifications(change: MatSlideToggleChange) {
@@ -35,8 +33,12 @@ export class SettingsComponent implements OnInit {
       }
 
       const registration = await navigator.serviceWorker.getRegistration();
+      debugger;
       if (registration) {
-        await scheduleNotification();
+        // use postMessage to advice service worker to schedule notifications
+        navigator.serviceWorker.controller?.postMessage({
+          type: 'ENABLE_NOTIFICATIONS',
+        });
         this.reloadScheduledNotifications();
       } else {
         return alert(
