@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { BehaviorSubject } from 'rxjs';
 
-declare var TimestampTrigger: any;
-
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -36,14 +34,10 @@ export class SettingsComponent implements OnInit {
 
       const registration = await navigator.serviceWorker.getRegistration();
       if (registration) {
-        // TODO Duplicated in sw-sync.js
-        const nextNotification = Date.now() + 60 * 60 * 1000;
-        registration.showNotification('Hydration Tracker', {
-          tag: 'reminder-' + nextNotification,
-          body: 'Drink more water',
-          showTrigger: new TimestampTrigger(nextNotification) as any,
-        } as any);
-
+        // use postMessage to advice service worker to schedule notifications
+        navigator.serviceWorker.controller?.postMessage({
+          type: 'ENABLE_NOTIFICATIONS',
+        });
         this.reloadScheduledNotifications();
       } else {
         return alert(
