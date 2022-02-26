@@ -33,7 +33,6 @@ export class SettingsComponent implements OnInit {
       }
 
       const registration = await navigator.serviceWorker.getRegistration();
-      debugger;
       if (registration) {
         // use postMessage to advice service worker to schedule notifications
         navigator.serviceWorker.controller?.postMessage({
