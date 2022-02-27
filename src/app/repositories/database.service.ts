@@ -6,10 +6,9 @@ import { db } from './database';
 import * as dayjs from 'dayjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DatabaseService {
-
   save$(entry: HistoryEntry): Observable<number> {
     return from(db.historyEntries.put(entry));
   }
@@ -18,13 +17,18 @@ export class DatabaseService {
     return from(db.historyEntries.delete(id));
   }
 
+  deleteEntriesBefore$(date: Date): Observable<number> {
+    return from(db.historyEntries.where('timestamp').below(date).delete());
+  }
+
   findByDate$(date: Date): Observable<HistoryEntry[]> {
     const d = dayjs(date).startOf('day');
     const lowerDate = d.toDate();
     const upperDate = d.add(1, 'day').toDate();
     return from(
       liveQuery(() =>
-        db.historyEntries.where('timestamp')
+        db.historyEntries
+          .where('timestamp')
           .between(lowerDate, upperDate)
           .toArray()
       )
@@ -32,9 +36,6 @@ export class DatabaseService {
   }
 
   findAll$(): Observable<HistoryEntry[]> {
-    return from(
-      liveQuery(() => db.historyEntries.toArray())
-    );
+    return from(liveQuery(() => db.historyEntries.toArray()));
   }
-
 }

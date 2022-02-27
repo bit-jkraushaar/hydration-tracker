@@ -1,25 +1,28 @@
 <mat-accordion>
-    <ng-container *ngFor="let date of historyDates">
-        <mat-expansion-panel *ngIf="groups.get(date) | async as group">
+    <ng-container *ngFor="let date of historyDates; index as i">
+        <mat-expansion-panel *ngIf="groups.get(date) | async as group" [expanded]="i === 0">
             <mat-expansion-panel-header>
                 <mat-panel-title>{{group.timestamp | date : 'fullDate'}}</mat-panel-title>
                 <mat-panel-description>{{group.totalAmount | number}} ml</mat-panel-description>
             </mat-expansion-panel-header>
-            <mat-list>
+            <mat-list *ngIf="group.entries.length > 0 else noEntries">
                 <mat-list-item *ngFor="let entry of group.entries">
                     <div class="history-entry">
                         <div class="content">
-                            <span>{{entry.timestamp | date : 'mediumTime'}}</span>
+                            <span>{{entry.timestamp | date : 'shortTime'}}</span>
                             <span>{{entry.amount | number}} ml</span>
                         </div>
                         <div class="action">
-                            <button mat-mini-fab color="warn" (click)="delete(entry)">
+                            <button mat-icon-button color="warn" (click)="delete(entry)" *ngIf="i === 0">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </div>
                     </div>
                 </mat-list-item>
             </mat-list>
+            <ng-template #noEntries>
+                <span>No entries, yet</span>
+            </ng-template>
         </mat-expansion-panel>
     </ng-container>
 </mat-accordion>

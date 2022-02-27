@@ -25,12 +25,16 @@ export class HistoryComponent implements OnInit {
       this.historyDates.push(date);
       this.groups.set(date, this.historyGroupByDate$(date));
     }
+
+    const [lastDate] = this.historyDates.slice(-1);
+    this.trackingService.purgeOldEntriesBefore(lastDate);
   }
 
   private historyGroupByDate$(date: Date): Observable<HistoryEntryGroup> {
     return this.trackingService.findByDate$(date).pipe(
       map(entries => {
         const totalAmount = entries.reduce((acc, value) => (acc + value.amount), 0);
+        entries.sort((a, b) => (b.timestamp.getTime() - a.timestamp.getTime()));
         const group: HistoryEntryGroup = {
           timestamp: date,
           totalAmount,
