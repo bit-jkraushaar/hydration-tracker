@@ -31,6 +31,7 @@ export class HistoryComponent implements OnInit {
     return this.trackingService.findByDate$(date).pipe(
       map(entries => {
         const totalAmount = entries.reduce((acc, value) => (acc + value.amount), 0);
+        entries.sort((a, b) => (b.timestamp.getTime() - a.timestamp.getTime()));
         const group: HistoryEntryGroup = {
           timestamp: date,
           totalAmount,
