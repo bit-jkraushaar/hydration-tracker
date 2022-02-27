@@ -25,6 +25,9 @@ export class HistoryComponent implements OnInit {
       this.historyDates.push(date);
       this.groups.set(date, this.historyGroupByDate$(date));
     }
+
+    const [lastDate] = this.historyDates.slice(-1);
+    this.trackingService.purgeOldEntriesBefore(lastDate);
   }
 
   private historyGroupByDate$(date: Date): Observable<HistoryEntryGroup> {

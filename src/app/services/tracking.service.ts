@@ -31,4 +31,8 @@ export class TrackingService {
   findByDate$(date: Date): Observable<HistoryEntry[]> {
     return this.databaseService.findByDate$(date);
   }
+
+  purgeOldEntriesBefore(threshold: Date): void {
+    this.databaseService.deleteEntriesBefore$(threshold).subscribe();
+  }
 }
