@@ -31,7 +31,7 @@
               "src/assets",
               "src/manifest.webmanifest",
               "src/sw-master.js",
-              "src/sw-sync.js",
+              "src/sw-custom.js",
               "src/notification-utils.js"
             ],
             "styles": [
