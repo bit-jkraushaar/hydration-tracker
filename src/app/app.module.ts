@@ -22,6 +22,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SettingsComponent } from './pages/settings/settings.component';
 
+import localeGerman from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,4 +58,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeGerman, 'de');
+  }
+}

@@ -1,9 +1,8 @@
-
 <mat-grid-list cols="1" rowHeight="fit" id="content-container">
     <mat-grid-tile>
       <mat-progress-spinner [value]="progress$ | async" diameter="200"></mat-progress-spinner>
       <div id="amount-tracker">
-        <span id="amount-label">{{amount$ | async | number}}</span>
+        <span id="amount-label">{{amount$ | async | number : undefined : locale}}</span>
         <span id="amount-unit">ml</span>
       </div>
     </mat-grid-tile>
