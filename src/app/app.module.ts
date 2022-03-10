@@ -14,6 +14,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
@@ -47,6 +48,7 @@ import { registerLocaleData } from '@angular/common';
     MatExpansionModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatRadioModule,
 
     ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,
