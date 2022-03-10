@@ -1,8 +1,23 @@
 :host {
-    padding: 10px;
-    display: block;
+  padding: 10px;
+  display: block;
 }
 
 .strong {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+mat-card:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.locale-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.locale-radio-button {
+  margin: 5px;
 }

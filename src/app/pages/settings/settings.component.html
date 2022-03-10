@@ -37,8 +37,29 @@
     </mat-slide-toggle>
     <div *ngIf="nextNotification$ | async as nextNotification">
       <p class="margin-reversed">
-        Next notification: {{notificationDate(nextNotification) | date : 'short'}}
+        Next notification:
+        {{ notificationDate(nextNotification) | date: "short" }}
       </p>
     </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Locale</mat-card-title>
+  <mat-card-content>
+    <p>Choose the locale used for dates, times and numbers:</p>
+    <mat-radio-group
+      class="locale-radio-group"
+      [value]="locale"
+      color="primary"
+      (change)="selectedLocaleChanged($event)"
+    >
+      <mat-radio-button class="locale-radio-button" value="en">
+        English
+      </mat-radio-button>
+      <mat-radio-button class="locale-radio-button" value="de">
+        German
+      </mat-radio-button>
+    </mat-radio-group>
   </mat-card-content>
 </mat-card>

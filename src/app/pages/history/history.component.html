@@ -2,15 +2,15 @@
     <ng-container *ngFor="let date of historyDates; index as i">
         <mat-expansion-panel *ngIf="groups.get(date) | async as group" [expanded]="i === 0">
             <mat-expansion-panel-header>
-                <mat-panel-title>{{group.timestamp | date : 'fullDate'}}</mat-panel-title>
-                <mat-panel-description>{{group.totalAmount | number}} ml</mat-panel-description>
+                <mat-panel-title>{{group.timestamp | date : 'fullDate' : undefined : locale}}</mat-panel-title>
+                <mat-panel-description>{{group.totalAmount | number : undefined : locale}} ml</mat-panel-description>
             </mat-expansion-panel-header>
             <mat-list *ngIf="group.entries.length > 0 else noEntries">
                 <mat-list-item *ngFor="let entry of group.entries">
                     <div class="history-entry">
                         <div class="content">
-                            <span>{{entry.timestamp | date : 'shortTime'}}</span>
-                            <span>{{entry.amount | number}} ml</span>
+                            <span>{{entry.timestamp | date : 'shortTime' : undefined : locale}}</span>
+                            <span>{{entry.amount | number : undefined : locale}} ml</span>
                         </div>
                         <div class="action">
                             <button mat-icon-button color="warn" (click)="delete(entry)" *ngIf="i === 0">

@@ -3,6 +3,7 @@ import * as dayjs from 'dayjs';
 import { map, Observable } from 'rxjs';
 import { HistoryEntry } from 'src/app/models/history-entry';
 import { HistoryEntryGroup } from 'src/app/models/history-entry-group';
+import { LocaleService } from 'src/app/services/locale.service';
 import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class HistoryComponent implements OnInit {
   historyDates: Date[] = [];
   groups: Map<Date, Observable<HistoryEntryGroup>> = new Map();
 
-  constructor(private trackingService: TrackingService) { }
+  constructor(private trackingService: TrackingService, private localeService: LocaleService) { }
 
   ngOnInit(): void {
     const today = dayjs().startOf('day');
@@ -47,6 +48,10 @@ export class HistoryComponent implements OnInit {
 
   delete(entry: HistoryEntry): void {
     this.trackingService.deleteEntry(entry);
+  }
+
+  get locale(): string {
+    return this.localeService.locale;
   }
 
 }

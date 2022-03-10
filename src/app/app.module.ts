@@ -14,6 +14,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
@@ -21,6 +22,9 @@ import { AboutComponent } from './pages/about/about.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SettingsComponent } from './pages/settings/settings.component';
+
+import localeGerman from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     MatExpansionModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatRadioModule,
 
     ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,
@@ -55,4 +60,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeGerman, 'de');
+  }
+}
