@@ -25,7 +25,8 @@ importScripts("./notification-utils.js");
   self.addEventListener("notificationclick", function (event) {
     event.notification.close();
 
-    event.waitUntil(scheduleNotification().then(() => openApp()));
+    event.waitUntil(scheduleNotification());
+    event.waitUntil(openApp());
   });
 
   self.addEventListener("notificationclose", (event) => {
