@@ -98,4 +98,16 @@ export class NotificationService {
   isNotificationsEnabled(): boolean {
     return localStorage.getItem('notificationsEnabled') === 'true';
   }
+
+  get frequency(): string {
+    let frequency = localStorage.getItem('notficationFrequency');
+    if (!frequency) {
+      frequency = '1';
+    }
+    return frequency;
+  }
+
+  set frequency(f: string) {
+    localStorage.setItem('notficationFrequency', f);
+  }
 }

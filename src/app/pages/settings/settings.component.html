@@ -28,13 +28,25 @@
         <span class="strong">disabled</span>
       </ng-template>
     </p>
-    <mat-slide-toggle
-      (change)="changeNotifications($event)"
-      [disabled]="!notificationTriggersSupported"
-      [checked]="notificationsEnabled"
-    >
-      Enable notifications
-    </mat-slide-toggle>
+    <form id="notification-form">
+      <mat-form-field>
+        <mat-label>Frequency</mat-label>
+        <mat-select [value]="notificationFrequency">
+          <mat-option value="1">1 hour</mat-option>
+          <mat-option value="2">2 hours</mat-option>
+          <mat-option value="3">3 hours</mat-option>
+          <mat-option value="4">4 hours</mat-option>
+        </mat-select>
+        <mat-hint>Note: Changing the frequency will only affect future notifications.</mat-hint>
+      </mat-form-field>
+      <mat-slide-toggle
+        (change)="changeNotifications($event)"
+        [disabled]="!notificationTriggersSupported"
+        [checked]="notificationsEnabled"
+      >
+        Enable notifications
+      </mat-slide-toggle>
+    </form>
     <div *ngIf="nextNotification$ | async as nextNotification">
       <p class="margin-reversed">
         Next notification:

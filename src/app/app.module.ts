@@ -15,6 +15,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HistoryComponent } from './pages/history/history.component';
 import { StartComponent } from './pages/start/start.component';
@@ -49,6 +51,8 @@ import { registerLocaleData } from '@angular/common';
     MatSlideToggleModule,
     MatCardModule,
     MatRadioModule,
+    MatFormFieldModule,
+    MatSelectModule,
 
     ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,

@@ -57,4 +57,12 @@ export class SettingsComponent implements OnInit {
   get locale(): string {
     return this.localeService.locale;
   }
+
+  get notificationFrequency(): string {
+    return this.notificationService.frequency;
+  }
+
+  set notificationFrequency(f: string) {
+    this.notificationService.frequency = f;
+  }
 }

@@ -21,3 +21,10 @@ mat-card:not(:last-child) {
 .locale-radio-button {
   margin: 5px;
 }
+
+#notification-form {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  gap: 10px;
+}

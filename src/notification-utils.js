@@ -1,5 +1,12 @@
 async function scheduleNotification() {
-  let nextNotification = Date.now() + 60 * 60 * 1000;
+  // TODO localStorage cannot be used in Service Worker... use IndexDB or messaging
+  //let frequency = +localStorage.getItem("notficationFrequency");
+  let frequency = 1;
+  if (!frequency) {
+    frequency = 1;
+  }
+
+  let nextNotification = Date.now() + frequency * 60 * 60 * 1000;
   const lowerBound = new Date().setHours(8, 0, 0);
   const upperBound = new Date().setHours(20, 0, 0);
 
