@@ -38,7 +38,7 @@
     <div *ngIf="nextNotification$ | async as nextNotification">
       <p class="margin-reversed">
         Next notification:
-        {{ notificationDate(nextNotification) | date: "short" }}
+        {{ notificationDate(nextNotification) | date : "short" : undefined : locale }}
       </p>
     </div>
   </mat-card-content>
