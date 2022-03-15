@@ -1,4 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeContext, LabelType, Options } from '@angular-slider/ngx-slider';
+import { formatDate } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -17,6 +25,20 @@ export class SettingsComponent implements OnInit, OnDestroy {
   nextNotification$: Observable<Notification | undefined>;
   notificationFrequency$ = new BehaviorSubject('1');
 
+  notificationStart: number = 8;
+  notificationEnd: number = 20;
+  options: Options = {
+    floor: 0,
+    ceil: 23,
+    translate: (value: number): string => {
+      return formatDate(
+        new Date().setHours(value, 0, 0),
+        'shortTime',
+        this.locale
+      );
+    },
+  };
+
   constructor(
     private notificationService: NotificationService,
     private localeService: LocaleService
@@ -27,6 +49,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .getFrequency$()
       .pipe(takeWhile(() => this.alive))
       .subscribe(this.notificationFrequency$);
+
+    this.notificationService
+      .getNotificationStart$()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((start) => (this.notificationStart = start));
+    this.notificationService
+      .getNotificationEnd$()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((end) => (this.notificationEnd = end));
   }
 
   ngOnInit(): void {
@@ -60,6 +91,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   selectedFrequencyChanged(event: MatSelectChange): void {
     this.notificationService.setFrequency(event?.value);
+  }
+
+  notificationStartChanged(value: number) {
+    this.notificationService.setNotificationStart(value);
+  }
+
+  notificationEndChanged(value: number) {
+    this.notificationService.setNotificationEnd(value);
   }
 
   get notificationTriggersSupported(): boolean {

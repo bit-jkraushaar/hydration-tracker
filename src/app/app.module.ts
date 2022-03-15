@@ -27,6 +27,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 
 import localeGerman from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,8 @@ import { registerLocaleData } from '@angular/common';
     MatRadioModule,
     MatFormFieldModule,
     MatSelectModule,
+
+    NgxSliderModule,
 
     ServiceWorkerModule.register('sw-master.js', {
       enabled: environment.production,

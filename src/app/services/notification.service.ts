@@ -112,4 +112,28 @@ export class NotificationService {
       .set$({ key: 'notificationFrequency', value: f })
       .subscribe();
   }
+
+  getNotificationStart$(): Observable<number> {
+    return this.configService
+      .get$('notificationStart')
+      .pipe(map((start) => (!start ? 8 : +start.value)));
+  }
+
+  setNotificationStart(start: number): void {
+    this.configService
+      .set$({ key: 'notificationStart', value: String(start) })
+      .subscribe();
+  }
+
+  getNotificationEnd$(): Observable<number> {
+    return this.configService
+      .get$('notificationEnd')
+      .pipe(map((end) => (!end ? 20 : +end.value)));
+  }
+
+  setNotificationEnd(end: number): void {
+    this.configService
+      .set$({ key: 'notificationEnd', value: String(end) })
+      .subscribe();
+  }
 }
