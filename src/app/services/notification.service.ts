@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { ConfigService } from '../repositories/config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-
   nextNotification$ = new BehaviorSubject<Notification | undefined>(undefined);
+
+  constructor(private configService: ConfigService) {}
 
   async enableNotifications(): Promise<void> {
     localStorage.setItem('notificationsEnabled', 'true');
@@ -99,15 +101,15 @@ export class NotificationService {
     return localStorage.getItem('notificationsEnabled') === 'true';
   }
 
-  get frequency(): string {
-    let frequency = localStorage.getItem('notficationFrequency');
-    if (!frequency) {
-      frequency = '1';
-    }
-    return frequency;
+  getFrequency$(): Observable<string> {
+    return this.configService
+      .get$('notificationFrequency')
+      .pipe(map((frequency) => (!frequency ? '1' : frequency.value)));
   }
 
-  set frequency(f: string) {
-    localStorage.setItem('notficationFrequency', f);
+  setFrequency(f: string): void {
+    this.configService
+      .set$({ key: 'notificationFrequency', value: f })
+      .subscribe();
   }
 }

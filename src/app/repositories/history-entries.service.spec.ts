@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DatabaseService } from './database.service';
+import { HistoryEntriesService } from './history-entries.service';
 
 describe('DatabaseService', () => {
-  let service: DatabaseService;
+  let service: HistoryEntriesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DatabaseService);
+    service = TestBed.inject(HistoryEntriesService);
   });
 
   it('should be created', () => {

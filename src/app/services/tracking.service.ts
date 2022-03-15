@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HistoryEntry } from '../models/history-entry';
-import { DatabaseService } from '../repositories/database.service';
+import { HistoryEntriesService } from '../repositories/history-entries.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackingService {
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private historyEntriesService: HistoryEntriesService) { }
 
   addEntry(entry: HistoryEntry): void {
-    this.databaseService.save$(entry).subscribe();
+    this.historyEntriesService.save$(entry).subscribe();
   }
 
   deleteEntry(entry: HistoryEntry): void {
     if (entry.id) {
-      this.databaseService.delete$(entry.id).subscribe();
+      this.historyEntriesService.delete$(entry.id).subscribe();
     }
   }
 
   findTodaysTotalAmount$(): Observable<number> {
-    return this.databaseService.findByDate$(new Date()).pipe(
+    return this.historyEntriesService.findByDate$(new Date()).pipe(
       map(entries => {
         return entries.reduce((acc, value) => (acc + value.amount), 0)
       }),
@@ -29,10 +29,10 @@ export class TrackingService {
   }
 
   findByDate$(date: Date): Observable<HistoryEntry[]> {
-    return this.databaseService.findByDate$(date);
+    return this.historyEntriesService.findByDate$(date);
   }
 
   purgeOldEntriesBefore(threshold: Date): void {
-    this.databaseService.deleteEntriesBefore$(threshold).subscribe();
+    this.historyEntriesService.deleteEntriesBefore$(threshold).subscribe();
   }
 }

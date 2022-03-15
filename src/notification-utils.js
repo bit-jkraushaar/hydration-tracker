@@ -1,7 +1,8 @@
 async function scheduleNotification() {
-  // TODO localStorage cannot be used in Service Worker... use IndexDB or messaging
-  //let frequency = +localStorage.getItem("notficationFrequency");
-  let frequency = 1;
+  const db = await openDB();
+  let frequency = await readFrequency(db);
+  // TODO remove
+  console.log(frequency);
   if (!frequency) {
     frequency = 1;
   }
@@ -12,7 +13,7 @@ async function scheduleNotification() {
 
   if (nextNotification < lowerBound) {
     nextNotification = lowerBound;
-  } else if(nextNotification > upperBound) {
+  } else if (nextNotification > upperBound) {
     const lowerBoundDate = new Date(lowerBound);
     nextNotification = lowerBoundDate.setDate(lowerBoundDate.getDate() + 1);
   }
@@ -24,8 +25,26 @@ async function scheduleNotification() {
     body: "Don't forget to drink water",
     silent: false,
     vibrate: [200, 100, 200],
-    icon: './assets/icons/icon-192x192.png',
-    badge: './assets/icons/icon-96x96.png',
+    icon: "./assets/icons/icon-192x192.png",
+    badge: "./assets/icons/icon-96x96.png",
     showTrigger: new TimestampTrigger(nextNotification),
+  });
+}
+
+async function openDB() {
+  return new Promise((resolve, reject) => {
+    const openRequest = self.indexedDB.open("hydrationTrackerDB");
+    openRequest.onsuccess = () => resolve(openRequest.result);
+    openRequest.onerror = () => reject("Error opening database");
+  });
+}
+
+async function readFrequency(db) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("config");
+    const config = transaction.objectStore("config");
+    const frequencyRequest = config.get("notificationFrequency");
+    frequencyRequest.onsuccess = () => resolve(frequencyRequest.result);
+    frequencyRequest.onerror = () => reject("Reading frequency failed");
   });
 }
