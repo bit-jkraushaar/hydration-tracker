@@ -1,13 +1,24 @@
 async function scheduleNotification() {
   const db = await openDB();
-  let frequency = await readFrequency(db);
+
+  let frequency = await readConfigEntry(db, "notificationFrequency");
   if (!frequency) {
     frequency = 1;
   }
 
+  let start = await readConfigEntry(db, "notificationStart");
+  if (!start) {
+    start = 8;
+  }
+
+  let end = await readConfigEntry(db, "notificationEnd");
+  if (!end) {
+    end = 20;
+  }
+
   let nextNotification = Date.now() + frequency * 60 * 60 * 1000;
-  const lowerBound = new Date().setHours(8, 0, 0);
-  const upperBound = new Date().setHours(20, 0, 0);
+  const lowerBound = new Date().setHours(start, 0, 0);
+  const upperBound = new Date().setHours(end, 0, 0);
 
   if (nextNotification < lowerBound) {
     nextNotification = lowerBound;
@@ -37,12 +48,12 @@ async function openDB() {
   });
 }
 
-async function readFrequency(db) {
+async function readConfigEntry(db, key) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("config");
     const config = transaction.objectStore("config");
-    const frequencyRequest = config.get("notificationFrequency");
-    frequencyRequest.onsuccess = () => resolve(+frequencyRequest.result.value);
-    frequencyRequest.onerror = () => reject("Reading frequency failed");
+    const request = config.get(key);
+    request.onsuccess = () => resolve(+request.result.value);
+    request.onerror = () => reject("Reading config entry failed");
   });
 }
