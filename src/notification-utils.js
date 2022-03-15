@@ -1,8 +1,6 @@
 async function scheduleNotification() {
   const db = await openDB();
   let frequency = await readFrequency(db);
-  // TODO remove
-  console.log(frequency);
   if (!frequency) {
     frequency = 1;
   }
@@ -44,7 +42,7 @@ async function readFrequency(db) {
     const transaction = db.transaction("config");
     const config = transaction.objectStore("config");
     const frequencyRequest = config.get("notificationFrequency");
-    frequencyRequest.onsuccess = () => resolve(frequencyRequest.result);
+    frequencyRequest.onsuccess = () => resolve(+frequencyRequest.result.value);
     frequencyRequest.onerror = () => reject("Reading frequency failed");
   });
 }
