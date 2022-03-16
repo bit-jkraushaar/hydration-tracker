@@ -14,6 +14,14 @@ export class AppDatabase extends Dexie {
         this.version(2).stores({
             config: 'key',
         });
+        this.version(3).upgrade(tx => {
+            const configEntries: ConfigEntry[] = [
+                {key: 'notificationFrequency', value: '1'},
+                {key: 'notificationStart', value: '8'},
+                {key: 'notificationEnd', value: '20'},
+            ]
+            return tx.table('config').bulkPut(configEntries);
+        });
     }
 }
 
