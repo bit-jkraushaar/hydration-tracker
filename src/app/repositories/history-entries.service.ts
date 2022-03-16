@@ -8,7 +8,7 @@ import * as dayjs from 'dayjs';
 @Injectable({
   providedIn: 'root',
 })
-export class DatabaseService {
+export class HistoryEntriesService {
   save$(entry: HistoryEntry): Observable<number> {
     return from(db.historyEntries.put(entry));
   }
