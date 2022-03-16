@@ -6,7 +6,9 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -38,6 +40,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
       );
     },
   };
+
+  _dailyGoal = 2000;
+  @ViewChild('goal') dailyGoalModel?: NgModel;
 
   constructor(
     private notificationService: NotificationService,
@@ -111,5 +116,18 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   get locale(): string {
     return this.localeService.locale;
+  }
+
+  get dailyGoal(): number {
+    // TODO replace with service call to store value
+    return this._dailyGoal;
+  }
+
+  set dailyGoal(goal: number) {
+    if (!this.dailyGoalModel?.invalid) {
+      // TODO replace with service call to store value
+      this._dailyGoal = goal;
+    }
+    
   }
 }

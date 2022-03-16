@@ -75,6 +75,41 @@
 </mat-card>
 
 <mat-card>
+  <mat-card-title>Hydration</mat-card-title>
+  <mat-card-content>
+    <form id="hydration-form">
+      <mat-form-field>
+        <mat-label>Daily goal</mat-label>
+        <input
+          matInput
+          name="goal"
+          type="number"
+          placeholder="2000"
+          value="2000"
+          min="100"
+          max="5000"
+          required
+          [(ngModel)]="dailyGoal" #goal="ngModel"
+        />
+        <span matSuffix>ml</span>
+        <mat-hint>Set your daily hydration goal</mat-hint>
+        <ng-container *ngIf="goal.invalid && (goal.dirty || goal.touched)">
+          <mat-error *ngIf="goal.errors?.['required']">
+            Please provide a daily goal.
+          </mat-error>
+          <mat-error *ngIf="goal.errors?.['min']">
+            Your daily goal must be at least 100 ml.
+          </mat-error>
+          <mat-error *ngIf="goal.errors?.['max']">
+            Your daily goal must not be greater than 5000 ml.
+          </mat-error>
+        </ng-container>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
   <mat-card-title>Locale</mat-card-title>
   <mat-card-content>
     <p>Choose the locale used for dates, times and numbers:</p>

@@ -22,7 +22,7 @@ mat-card:not(:last-child) {
   margin: 5px;
 }
 
-#notification-form {
+#notification-form, #hydration-form {
   display: flex;
   flex-direction: column;
   margin: 15px 0;
