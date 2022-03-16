@@ -15,6 +15,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { BehaviorSubject, Observable, takeWhile } from 'rxjs';
 import { LocaleService } from 'src/app/services/locale.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
   selector: 'app-settings',
@@ -41,12 +42,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
     },
   };
 
-  _dailyGoal = 2000;
   @ViewChild('goal') dailyGoalModel?: NgModel;
 
   constructor(
     private notificationService: NotificationService,
-    private localeService: LocaleService
+    private localeService: LocaleService,
+    private trackingService: TrackingService
   ) {
     this.nextNotification$ =
       this.notificationService.nextNotification$.asObservable();
@@ -119,14 +120,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   get dailyGoal(): number {
-    // TODO replace with service call to store value
-    return this._dailyGoal;
+    return this.trackingService.dailyGoal;
   }
 
   set dailyGoal(goal: number) {
     if (!this.dailyGoalModel?.invalid) {
-      // TODO replace with service call to store value
-      this._dailyGoal = goal;
+      this.trackingService.dailyGoal = goal;
     }
     
   }

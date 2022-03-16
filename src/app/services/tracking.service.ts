@@ -35,4 +35,16 @@ export class TrackingService {
   purgeOldEntriesBefore(threshold: Date): void {
     this.historyEntriesService.deleteEntriesBefore$(threshold).subscribe();
   }
+
+  set dailyGoal(goal: number) {
+    localStorage.setItem('dailyGoal', String(goal));
+  }
+
+  get dailyGoal(): number {
+    let goal = localStorage.getItem('dailyGoal');
+    if (!goal) {
+      goal = "2000";
+    }
+    return +goal;
+  }
 }
