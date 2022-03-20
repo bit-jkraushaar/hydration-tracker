@@ -6,13 +6,16 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { BehaviorSubject, Observable, takeWhile } from 'rxjs';
 import { LocaleService } from 'src/app/services/locale.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TrackingService } from 'src/app/services/tracking.service';
 
 @Component({
   selector: 'app-settings',
@@ -39,9 +42,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
     },
   };
 
+  @ViewChild('goal') dailyGoalModel?: NgModel;
+
   constructor(
     private notificationService: NotificationService,
-    private localeService: LocaleService
+    private localeService: LocaleService,
+    private trackingService: TrackingService
   ) {
     this.nextNotification$ =
       this.notificationService.nextNotification$.asObservable();
@@ -111,5 +117,16 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   get locale(): string {
     return this.localeService.locale;
+  }
+
+  get dailyGoal(): number {
+    return this.trackingService.dailyGoal;
+  }
+
+  set dailyGoal(goal: number) {
+    if (!this.dailyGoalModel?.invalid) {
+      this.trackingService.dailyGoal = goal;
+    }
+    
   }
 }

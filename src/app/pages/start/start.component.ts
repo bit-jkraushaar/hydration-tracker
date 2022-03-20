@@ -19,7 +19,7 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
     this.amount$ = this.trackingService.findTodaysTotalAmount$();
     this.progress$ = this.trackingService.findTodaysTotalAmount$().pipe(
-      map(amount => (amount / 2000) * 100),
+      map(amount => (amount / this.trackingService.dailyGoal) * 100),
     );
   }
 
