@@ -9,9 +9,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { MatRadioChange } from '@angular/material/radio';
-import { MatSelectChange } from '@angular/material/select';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatLegacyRadioChange as MatRadioChange } from '@angular/material/legacy-radio';
+import { MatLegacySelectChange as MatSelectChange } from '@angular/material/legacy-select';
+import { MatLegacySlideToggleChange as MatSlideToggleChange } from '@angular/material/legacy-slide-toggle';
 import { BehaviorSubject, Observable, takeWhile } from 'rxjs';
 import { LocaleService } from 'src/app/services/locale.service';
 import { NotificationService } from 'src/app/services/notification.service';
