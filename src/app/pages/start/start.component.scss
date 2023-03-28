@@ -30,7 +30,6 @@ mat-progress-spinner {
 
 #action-list {
     min-width: 50%;
-    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
     mat-list-item {
         height: 60px;
         padding: 10px 0;
