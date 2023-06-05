@@ -30,7 +30,6 @@ mat-progress-spinner {
 
 #action-list {
     min-width: 50%;
-
     mat-list-item {
         height: 60px;
         padding: 10px 0;
@@ -38,6 +37,6 @@ mat-progress-spinner {
 
     button {
         width: 100%;
-        height: inherit;
+        height: 48px;
     }
 }

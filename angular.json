@@ -119,5 +119,7 @@
       }
     }
   },
-  "defaultProject": "hydration-tracker"
+  "cli": {
+    "analytics": false
+  }
 }
